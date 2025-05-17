@@ -1,4 +1,4 @@
-# GPA Calculator
+# GPA Calculator - FOT RUSL
 
 A comprehensive GPA Calculator designed specifically for university students to track and calculate their academic performance.
 

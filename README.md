@@ -2,7 +2,7 @@
 
 A comprehensive GPA Calculator designed specifically for university students to track and calculate their academic performance.
 
- Download the [Windows installer](https://github.com/SunethUdayanga/GPA-Calculator-for-RUSL-FOT/releases/download/2.4.567/GPACalx64.exe)
+ Download the [Windows installer](https://github.com/SunethUdayanga/GPA-Calculator-for-RUSL-FOT/releases/download/2.5.831/GPA.Calculator.Setup.2.5.831.exe)
 
 ## Features
 

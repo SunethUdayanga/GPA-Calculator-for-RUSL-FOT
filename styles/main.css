@@ -757,3 +757,22 @@ section.active-section {
 .optional-subjects-header .alert {
   margin-bottom: 20px;
 }
+
+.editable-field {
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 3px;
+  transition: background-color 0.2s;
+}
+
+.editable-field:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.editable-field input {
+  min-width: 60px;
+}
+
+.course-code {
+  font-weight: bold;
+}

@@ -924,6 +924,7 @@ const bioTech = [
 // Empty array to replace the removed optional subjects
 const availableOptionalSubjects = [];
 
+
 // Constants
 const TOTAL_CREDITS_REQUIRED = 120;
 const COMPULSORY_CREDITS = 114; // As per requirement
@@ -1289,7 +1290,7 @@ function updateDegreeProgress() {
   creditsRemainingElement.textContent = creditsRemaining;
   totalRequiredElement.textContent = requirements.totalCredits;
   
-  // Update progress bar color based on progress
+    // Update progress bar color based on progress
   if (progressPercentage < 50) {
     degreeProgressBar.classList.remove("bg-success", "bg-warning");
     degreeProgressBar.classList.add("bg-danger");
@@ -1304,9 +1305,9 @@ function updateDegreeProgress() {
   // Update department-specific information
   if (departmentInfoElement) {
     departmentInfoElement.innerHTML = `
-      <div class=" mt-3">
+      <div class="">
         <div class="card-header">
-          <h5>${getDepartmentName(currentDepartment)} Requirements</h5>
+          <h6>${getDepartmentName(currentDepartment)} Requirements</h6>
         </div>
         <div class="">
           <ul class="list-group">
@@ -1332,76 +1333,6 @@ function updateDegreeProgress() {
     progressPercentage,
     requirements
   });
-}
-
-// Get department-specific requirements
-function getDepartmentRequirements(department) {
-  // Default requirements
-  const defaultRequirements = {
-    totalCredits: 120,
-    compulsoryCredits: 114,
-    optionalCredits: 6,
-    additionalRequirements: [
-      "Complete the degree program within four academic years",
-      "Obtain grades of C or better in all compulsory courses"
-    ]
-  };
-  
-  // Department-specific requirements
-  const departmentRequirements = {
-    'ict': {
-      totalCredits: 120,
-      compulsoryCredits: 114,
-      optionalCredits: 6,
-      additionalRequirements: [
-        "Complete the degree program within four academic years",
-        "Obtain grades of C or better in all compulsory courses",
-        "Complete at least one industry project"
-      ]
-    },
-    'material': {
-      totalCredits: 120,
-      compulsoryCredits: 104,
-      optionalCredits: 16,
-      additionalRequirements: [
-        "Complete the degree program within four academic years",
-        "Obtain grades of C or better in all compulsory courses",
-        "Complete materials laboratory courses"
-      ]
-    },
-    'electrical': {
-      totalCredits: 120,
-      compulsoryCredits: 100,
-      optionalCredits: 20,
-      additionalRequirements: [
-        "Complete the degree program within four academic years",
-        "Obtain grades of C or better in all compulsory courses",
-        "Complete electrical workshop requirements"
-      ]
-    },
-    'food': {
-      totalCredits: 120,
-      compulsoryCredits: 111,
-      optionalCredits: 9,
-      additionalRequirements: [
-        "Complete the degree program within four academic years",
-        "Obtain grades of C or better in all compulsory courses",
-        "Complete food safety certification"
-      ]
-    },
-    'bio': {
-      totalCredits: 120,
-      compulsoryCredits: 115,
-      optionalCredits: 5,
-      additionalRequirements: [
-        "Complete the degree program within four academic years",
-        "Obtain grades of C or better in all compulsory courses",
-        "Complete laboratory safety training"
-      ]
-    }
-  };
-  
-  return departmentRequirements[department] || defaultRequirements;
 }
 
 // Determine current department based on courses
@@ -1434,6 +1365,76 @@ function determineDepartment() {
   }
   
   return detectedDepartment;
+}
+
+// Get department-specific requirements
+function getDepartmentRequirements(department) {
+  // Default requirements
+  const defaultRequirements = {
+    totalCredits: 120,
+    compulsoryCredits: 114,
+    optionalCredits: 6,
+    additionalRequirements: [
+      "Complete the degree program within four academic years",
+      "Obtain grades of C or better in all compulsory courses"
+    ]
+  };
+  
+  // Department-specific requirements
+  const departmentRequirements = {
+    'ict': {
+      totalCredits: 120,
+      compulsoryCredits: 114,
+      optionalCredits: 6,
+      additionalRequirements: [
+        "Complete the degree program within four academic years",
+        "Obtain grades of C or better in all compulsory courses",
+        "Complete at least one industry project"
+      ]
+    },
+    'material': {
+      totalCredits: 120,
+      compulsoryCredits: 110,
+      optionalCredits: 10,
+      additionalRequirements: [
+        "Complete the degree program within four academic years",
+        "Obtain grades of C or better in all compulsory courses",
+        "Complete materials laboratory courses"
+      ]
+    },
+    'electrical': {
+      totalCredits: 120,
+      compulsoryCredits: 112,
+      optionalCredits: 8,
+      additionalRequirements: [
+        "Complete the degree program within four academic years",
+        "Obtain grades of C or better in all compulsory courses",
+        "Complete electrical workshop requirements"
+      ]
+    },
+    'food': {
+      totalCredits: 120,
+      compulsoryCredits: 115,
+      optionalCredits: 5,
+      additionalRequirements: [
+        "Complete the degree program within four academic years",
+        "Obtain grades of C or better in all compulsory courses",
+        "Complete food safety certification"
+      ]
+    },
+    'bio': {
+      totalCredits: 120,
+      compulsoryCredits: 113,
+      optionalCredits: 7,
+      additionalRequirements: [
+        "Complete the degree program within four academic years",
+        "Obtain grades of C or better in all compulsory courses",
+        "Complete laboratory safety training"
+      ]
+    }
+  };
+  
+  return departmentRequirements[department] || defaultRequirements;
 }
 
 // Render courses organized by year and semester
@@ -1477,7 +1478,7 @@ function renderCoursesByYear() {
                     data-bs-toggle="pill" 
                     data-bs-target="${yearTabId}" 
                     type="button" 
-                                        role="tab">
+                    role="tab">
                 Year ${year}
             </button>
         `;
@@ -1557,9 +1558,13 @@ function renderCoursesByYear() {
           : "no-grade";
 
         row.innerHTML = `
-            <td>${course.courseCode}</td>
+            <td>
+              <span class="editable-field course-code" data-id="${course.id}" data-field="courseCode">${course.courseCode}</span>
+            </td>
             <td>${course.subject}</td>
-            <td>${course.credits}</td>
+            <td>
+              <span class="editable-field course-credits" data-id="${course.id}" data-field="credits">${course.credits}</span>
+            </td>
             <td><span class="course-status status-${course.status}">${statusFullName}</span></td>
             <td>
                 <span class="course-grade ${gradeClass}">${course.grade || "-"}</span>
@@ -1662,9 +1667,13 @@ function renderOptionalSubjects() {
       
       currentOptionalHTML += `
         <tr class="${rowClass}">
-          <td>${course.courseCode}</td>
+          <td>
+            <span class="editable-field course-code" data-id="${course.id}" data-field="courseCode">${course.courseCode}</span>
+          </td>
           <td>${course.subject}</td>
-          <td>${course.credits}</td>
+          <td>
+            <span class="editable-field course-credits" data-id="${course.id}" data-field="credits">${course.credits}</span>
+          </td>
           <td>${course.year}</td>
           <td>${course.semester}</td>
           <td><span class="course-grade ${gradeClass}">${course.grade || "-"}</span></td>
@@ -1673,12 +1682,14 @@ function renderOptionalSubjects() {
             <button class="btn btn-sm ${isActive ? 'btn-warning' : 'btn-success'} toggle-optional-btn" data-id="${course.id}" data-action="${isActive ? 'deactivate' : 'activate'}">
               <i class="fas fa-${isActive ? 'times' : 'check'}"></i>
             </button>
+            <button class="btn btn-sm btn-primary edit-optional-grade-btn" data-id="${course.id}">
+              <i class="fas fa-edit"></i> Grade
+            </button>
           </td>
         </tr>
       `;
     });
-    
-    currentOptionalHTML += `
+        currentOptionalHTML += `
           </tbody>
         </table>
       </div>
@@ -1818,6 +1829,9 @@ function renderOptionalSubjects() {
       }
     });
   });
+  
+  // Setup editable fields for optional subjects
+  setupEditableFields();
 }
 
 // Toggle optional subject active/inactive status
@@ -1880,7 +1894,7 @@ function simulateGPAImpact(subject) {
   Object.keys(gradePoints).forEach(grade => {
     const newTotalGradePoints = totalCurrentGradePoints + (gradePoints[grade] * subject.credits);
     const newTotalCredits = totalCurrentCredits + subject.credits;
-        const newGPA = newTotalCredits > 0 ? newTotalGradePoints / newTotalCredits : 0;
+    const newGPA = newTotalCredits > 0 ? newTotalGradePoints / newTotalCredits : 0;
     
     impacts[grade] = newGPA - currentGPA;
   });
@@ -1927,14 +1941,110 @@ function addCourseActionListeners() {
   // Make entire row clickable for grade editing
   document.querySelectorAll(".course-row").forEach((row) => {
     row.onclick = function (e) {
-      // Don't trigger if clicking on a button
-      if (e.target.closest("button")) {
+      // Don't trigger if clicking on a button or editable field
+      if (e.target.closest("button") || e.target.closest(".editable-field")) {
         return;
       }
       const courseId = this.getAttribute("data-id");
       openGradeModal(courseId);
     };
   });
+  
+  // Setup editable fields
+  setupEditableFields();
+}
+
+// Add this function to handle editable fields
+function setupEditableFields() {
+  document.querySelectorAll('.editable-field').forEach(field => {
+    // Remove any existing event listeners
+    field.removeEventListener('click', handleEditableFieldClick);
+    
+    // Add click event listener
+    field.addEventListener('click', handleEditableFieldClick);
+  });
+}
+
+// Handle click on editable field
+function handleEditableFieldClick(e) {
+  const field = e.target;
+  const courseId = field.getAttribute('data-id');
+  const fieldName = field.getAttribute('data-field');
+  const currentValue = field.textContent;
+  
+  // Create input element
+  const input = document.createElement('input');
+  input.type = fieldName === 'credits' ? 'number' : 'text';
+  if (fieldName === 'credits') {
+    input.min = 0;
+    input.step = 1;
+  }
+  input.value = currentValue;
+  input.className = 'form-control form-control-sm';
+  
+  // Replace the span with the input
+  field.innerHTML = '';
+  field.appendChild(input);
+  
+  // Focus the input
+  input.focus();
+  
+  // Handle input blur (when user clicks away)
+  input.addEventListener('blur', () => {
+    handleFieldUpdate(courseId, fieldName, input.value);
+  });
+  
+  // Handle enter key
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      input.blur();
+    }
+  });
+  
+  // Stop propagation to prevent row click
+  input.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+}
+
+// Handle field update
+function handleFieldUpdate(courseId, fieldName, newValue) {
+  const courseIndex = courses.findIndex(c => c.id === courseId);
+  
+  if (courseIndex === -1) {
+    console.error('Course not found:', courseId);
+    return;
+  }
+  
+  // Validate the new value
+  if (fieldName === 'courseCode' && newValue.trim() === '') {
+    alert('Course code cannot be empty');
+    renderCoursesByYear(); // Re-render to restore original value
+    return;
+  }
+  
+  if (fieldName === 'credits') {
+    const creditsValue = parseInt(newValue);
+    if (isNaN(creditsValue) || creditsValue < 0) {
+      alert('Credits must be a non-negative number');
+      renderCoursesByYear(); // Re-render to restore original value
+      return;
+    }
+    
+    // Update the course
+    courses[courseIndex][fieldName] = creditsValue;
+  } else {
+    // Update the course
+    courses[courseIndex][fieldName] = newValue;
+  }
+  
+  // Save changes
+  saveCourses();
+  
+  // Update UI
+  updateDashboard();
+  renderCoursesByYear();
+  renderOptionalSubjects();
 }
 
 // Open grade selection modal
@@ -2017,9 +2127,16 @@ function setupEventListeners() {
     });
   }
 
-  // Export data
-  if (exportBtn) {
-    exportBtn.addEventListener("click", exportData);
+  // Export data as JSON
+  const exportJsonBtn = document.getElementById("exportJsonBtn");
+  if (exportJsonBtn) {
+    exportJsonBtn.addEventListener("click", exportData);
+  }
+  
+  // Export data as CSV
+  const exportCsvBtn = document.getElementById("exportCsvBtn");
+  if (exportCsvBtn) {
+    exportCsvBtn.addEventListener("click", exportDataAsCsv);
   }
 
   // Grade selection in modal
@@ -2030,95 +2147,7 @@ function setupEventListeners() {
       modal.hide();
     };
   });
-  
-  // Department data loading
-  const loadDepartmentDataBtn = document.getElementById("loadDepartmentData");
-  if (loadDepartmentDataBtn) {
-    loadDepartmentDataBtn.addEventListener("click", () => {
-      const departmentSelector = document.getElementById("departmentSelector");
-      const selectedDepartment = departmentSelector.value;
-      
-      if (confirm(`This will replace any existing data with ${getDepartmentName(selectedDepartment)} sample data. Continue?`)) {
-        loadDepartmentData(selectedDepartment);
-      }
-    });
-  }
 }
-
-// Get department name
-function getDepartmentName(departmentCode) {
-  switch (departmentCode) {
-    case 'ict': return 'Information & Communication Technology';
-    case 'material': return 'Materials Technology';
-    case 'electrical': return 'Electrical & Electronic Technology';
-    case 'food': return 'Food Technology';
-    case 'bio': return 'Bioprocess Technology';
-    default: return 'Unknown Department';
-  }
-}
-
-// Load department-specific data
-function loadDepartmentData(department) {
-  // Clear existing courses
-  courses = [];
-  
-  let dataToLoad;
-  
-  // Select the appropriate data based on department
-  switch (department) {
-    case 'ict':
-      dataToLoad = sampleData; // ICT sample data
-      break;
-    case 'material':
-      dataToLoad = materialTech; // Materials Technology data
-      break;
-    case 'electrical':
-      dataToLoad = tricalTronicTech; // Electrical & Electronic Technology data
-      break;
-    case 'food':
-      dataToLoad = foodTech; // Food Technology data
-      break;
-    case 'bio':
-      dataToLoad = bioTech; // Bioprocess Technology data
-      break;
-    default:
-      console.error("Unknown department:", department);
-      return;
-  }
-  
-  // Check if the data exists
-  if (!dataToLoad || !Array.isArray(dataToLoad) || dataToLoad.length === 0) {
-    console.error(`No data available for ${getDepartmentName(department)}`);
-    alert(`Sample data for ${getDepartmentName(department)} department is not available.`);
-    return;
-  }
-  
-  console.log(`Loading ${dataToLoad.length} courses for ${getDepartmentName(department)}`);
-  
-  // Add the selected data with new IDs
-  dataToLoad.forEach((course) => {
-    courses.push({
-      ...course,
-      id: generateId(),
-      isInactive: false // All sample data courses are active by default
-    });
-  });
-  
-  saveCourses();
-  
-  // Make sure all dashboard elements are updated
-  updateDashboard();
-  
-  // Explicitly call updateDegreeProgress to ensure it's updated
-  updateDegreeProgress();
-  
-  renderCoursesByYear();
-  renderOptionalSubjects();
-  
-  // Show success message
-  alert(`${getDepartmentName(department)} sample data loaded successfully!`);
-}
-
 
 // Add a new course
 function addCourse() {
@@ -2127,7 +2156,7 @@ function addCourse() {
   const courseCode = document.getElementById("courseCode").value;
   const subject = document.getElementById("subject").value;
   const credits = parseInt(document.getElementById("credits").value);
-  const status = document.getElementById("status").value;
+    const status = document.getElementById("status").value;
   const grade = document.getElementById("grade").value;
 
   // Check if course code already exists
@@ -2222,7 +2251,22 @@ function updateCourseGrade(courseId, grade) {
 
 // Load sample dataset
 function loadSampleDataset() {
-  loadDepartmentData('ict'); // Default to ICT data for backward compatibility
+  // Clear existing courses
+  courses = [];
+
+  // Add sample data with new IDs
+  sampleData.forEach((course) => {
+    courses.push({
+      ...course,
+      id: generateId(),
+      isInactive: false // All sample data courses are active by default
+    });
+  });
+
+  saveCourses();
+  updateDashboard();
+  renderCoursesByYear();
+  renderOptionalSubjects();
 }
 
 // Export data as JSON
@@ -2242,6 +2286,19 @@ function exportData() {
 // Generate a unique ID
 function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
+
+// Get department name from code
+function getDepartmentName(departmentCode) {
+  const departmentNames = {
+    'ict': 'Information & Communication Technology',
+    'material': 'Materials Technology',
+    'electrical': 'Electrical & Electronic Technology',
+    'food': 'Food Technology',
+    'bio': 'Bio-Process Technology'
+  };
+  
+  return departmentNames[departmentCode] || 'Information & Communication Technology';
 }
 
 // Calculate what class honors the student is on track for
@@ -2356,9 +2413,106 @@ function showGPARecommendations() {
       return bImpact - aImpact;
     });
   
- return {
+  return {
     message: `You need to increase your GPA by ${gpaNeeded.toFixed(2)} to reach ${nextHonors} (${nextThreshold}).`,
     recommendations: improvableCourses.slice(0, 5) // Top 5 courses to improve
   };
 }
+
+// Export data as CSV with summary information
+function exportDataAsCsv() {
+  // Calculate summary data
+  const overallGPA = document.getElementById("overallGPA").textContent;
+  const compulsoryCredits = document.getElementById("compulsoryCredits").textContent;
+  const optionalCredits = document.getElementById("optionalCredits").textContent;
+  const totalCredits = document.getElementById("totalCredits").textContent;
+  
+  // Create CSV content with summary section
+  let csvContent = "# GPA CALCULATOR EXPORT\n";
+  csvContent += `# Date: ${new Date().toLocaleDateString()}\n`;
+  csvContent += `# Overall GPA: ${overallGPA}\n`;
+  csvContent += `# Compulsory Credits: ${compulsoryCredits}\n`;
+  csvContent += `# Optional Credits: ${optionalCredits}\n`;
+  csvContent += `# Total Credits: ${totalCredits}\n`;
+  csvContent += "#\n";
+  
+  // Add course data header
+  csvContent += "Year,Semester,Course Code,Subject,Credits,Status,Grade,Active\n";
+  
+  // Sort courses by year and semester
+  const sortedCourses = [...courses].sort((a, b) => {
+    if (a.year !== b.year) return a.year - b.year;
+    if (a.semester !== b.semester) return a.semester - b.semester;
+    return a.courseCode.localeCompare(b.courseCode);
+  });
+  
+  // Add each course as a row
+  sortedCourses.forEach(course => {
+    // Escape commas in text fields
+    const subject = course.subject.includes(',') ? `"${course.subject}"` : course.subject;
+    const status = getStatusFullName(course.status);
+    const isActive = course.isInactive ? 'No' : 'Yes';
+    
+    // Create CSV row
+    const row = [
+      course.year,
+      course.semester,
+      course.courseCode,
+      subject,
+      course.credits,
+      status,
+      course.grade || 'N/A',
+      isActive
+    ].join(',');
+    
+    csvContent += row + '\n';
+  });
+  
+  // Add semester summary section
+  csvContent += "\n# SEMESTER SUMMARY\n";
+  csvContent += "Year,Semester,GPA,Credits\n";
+  
+  // Get unique year-semester combinations
+  const semesters = [];
+  courses.forEach((course) => {
+    if (course.isInactive) return;
+    
+    const semKey = `${course.year}-${course.semester}`;
+    if (!semesters.some((sem) => sem.key === semKey)) {
+      semesters.push({
+        key: semKey,
+        year: course.year,
+        semester: course.semester,
+      });
+    }
+  });
+  
+  // Sort semesters
+  semesters.sort((a, b) => {
+    if (a.year !== b.year) return a.year - b.year;
+    return a.semester - b.semester;
+  });
+  
+  // Add semester data
+  semesters.forEach((sem) => {
+    const gpa = calculateSemesterGPA(sem.year, sem.semester);
+    const credits = calculateSemesterCredits(sem.year, sem.semester);
+    
+    csvContent += `${sem.year},${sem.semester},${gpa},${credits}\n`;
+  });
+  
+  // Create a download link for the CSV
+  const encodedUri = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvContent);
+  const link = document.createElement('a');
+  link.setAttribute('href', encodedUri);
+  link.setAttribute('download', 'gpa_data.csv');
+  
+  // Trigger download
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+
+
 

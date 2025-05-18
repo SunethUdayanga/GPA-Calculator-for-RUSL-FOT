@@ -1,18 +1,41 @@
 {
   "name": "gpa-calculator",
-  "version": "1.0.0",
+  "version": "2.5.831",
+  "description": "University GPA Calculator",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "build"
+    "build": "electron-builder --win",
+    "build-installer": "electron-builder --win --x64"
   },
   "author": "Suneth Udayanga",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "electron": "^36.2.1",
+    "electron-builder": "^26.0.12",
     "electron-packager": "^17.1.2",
     "nodemon": "^3.1.10"
+  },
+  "build": {
+    "appId": "com.yourname.gpacalculator",
+    "productName": "GPA Calculator",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "GPA Calculator"
+    }
   }
+
 }

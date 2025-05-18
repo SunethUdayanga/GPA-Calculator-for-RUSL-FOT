@@ -36,10 +36,16 @@
           <li data-section="settings"><i class="fas fa-cog"></i> Settings</li>
         </ul>
         <div class="sidebar-footer">
-          <button id="exportBtn" class="btn btn-outline-light">
-            <i class="fas fa-file-export"></i> Export Data
-          </button>
-          <small class="text-white-emphasis">V 2.4.567</small>
+          <div class="dropdown">
+            <button class="btn btn-outline-light dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-file-export"></i> Export Data
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="exportDropdown">
+              <li><a class="dropdown-item" id="exportJsonBtn" href="#"><i class="fas fa-file-code"></i> Export as JSON</a></li>
+              <li><a class="dropdown-item" id="exportCsvBtn" href="#"><i class="fas fa-file-csv"></i> Export as CSV</a></li>
+            </ul>
+            <small class="d-flex mt-3">V 2.5.831</small>
+          </div>
         </div>
       </nav>
 
@@ -251,7 +257,7 @@
             </div>
           </div>
 
-          <div id="optionalSubjectsContainer" class="card">
+          <div id="optionalSubjectsContainer" class="">
             <!-- Optional subjects will be rendered here -->
           </div>
         </section>

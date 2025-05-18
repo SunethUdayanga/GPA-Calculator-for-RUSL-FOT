@@ -14,7 +14,7 @@ const createWindow = () => {
       contextIsolation: true
     },
     // Add this line to hide the menu bar
-    autoHideMenuBar: true
+    // autoHideMenuBar: true
   })
 
   // Or alternatively, you can completely remove the menu bar with this line:
